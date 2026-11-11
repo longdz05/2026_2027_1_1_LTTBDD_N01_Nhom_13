@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'data/sample_data.dart';
 import 'utils/theme.dart';
+import 'widgets/flip_card.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,27 +43,41 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final word = sampleDecks[0].words[0];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+        child: FlipCard(
+          front: Card(
+            color: Theme.of(context).colorScheme.primaryContainer,
+            child: SizedBox(
+              width: 300,
+              height: 200,
+              child: Center(
+                child: Text(word.term, style: const TextStyle(fontSize: 32)),
+              ),
             ),
-          ],
+          ),
+          back: Card(
+            color: Theme.of(context).colorScheme.secondaryContainer,
+            child: SizedBox(
+              width: 300,
+              height: 200,
+              child: Center(
+                child: Text(word.meaning, style: const TextStyle(fontSize: 28)),
+              ),
+            ),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        child: Text('$_counter'),
       ),
     );
   }
