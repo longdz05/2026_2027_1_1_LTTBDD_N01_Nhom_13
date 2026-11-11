@@ -1,0 +1,273 @@
+import '../models/deck.dart';
+import '../models/word.dart';
+
+final List<Deck> sampleDecks = [
+  Deck(
+    id: 'family',
+    name: 'Family',
+    icon: '👨‍👩‍👧',
+    words: [
+      Word(
+        id: 'f1',
+        term: 'Mother',
+        meaning: 'Mẹ',
+        example: 'My mother cooks very well.',
+      ),
+      Word(
+        id: 'f2',
+        term: 'Father',
+        meaning: 'Bố',
+        example: 'My father works hard every day.',
+      ),
+      Word(
+        id: 'f3',
+        term: 'Sister',
+        meaning: 'Chị / Em gái',
+        example: 'I have one younger sister.',
+      ),
+      Word(
+        id: 'f4',
+        term: 'Brother',
+        meaning: 'Anh / Em trai',
+        example: 'My brother plays football.',
+      ),
+      Word(
+        id: 'f5',
+        term: 'Grandmother',
+        meaning: 'Bà',
+        example: 'My grandmother tells great stories.',
+      ),
+      Word(
+        id: 'f6',
+        term: 'Grandfather',
+        meaning: 'Ông',
+        example: 'My grandfather loves gardening.',
+      ),
+      Word(
+        id: 'f7',
+        term: 'Uncle',
+        meaning: 'Chú / Bác / Cậu',
+        example: 'My uncle lives in Hanoi.',
+      ),
+      Word(
+        id: 'f8',
+        term: 'Aunt',
+        meaning: 'Cô / Dì / Thím',
+        example: 'My aunt visits us every summer.',
+      ),
+      Word(
+        id: 'f9',
+        term: 'Cousin',
+        meaning: 'Anh chị em họ',
+        example: 'I play games with my cousin.',
+      ),
+      Word(
+        id: 'f10',
+        term: 'Parents',
+        meaning: 'Bố mẹ',
+        example: 'My parents are very kind.',
+      ),
+    ],
+  ),
+  Deck(
+    id: 'travel',
+    name: 'Travel',
+    icon: '✈️',
+    words: [
+      Word(
+        id: 't1',
+        term: 'Airport',
+        meaning: 'Sân bay',
+        example: 'We arrive at the airport early.',
+      ),
+      Word(
+        id: 't2',
+        term: 'Ticket',
+        meaning: 'Vé',
+        example: 'I bought a train ticket.',
+      ),
+      Word(
+        id: 't3',
+        term: 'Luggage',
+        meaning: 'Hành lý',
+        example: 'My luggage is very heavy.',
+      ),
+      Word(
+        id: 't4',
+        term: 'Passport',
+        meaning: 'Hộ chiếu',
+        example: 'Do not forget your passport.',
+      ),
+      Word(
+        id: 't5',
+        term: 'Hotel',
+        meaning: 'Khách sạn',
+        example: 'The hotel is near the beach.',
+      ),
+      Word(
+        id: 't6',
+        term: 'Map',
+        meaning: 'Bản đồ',
+        example: 'Let me check the map.',
+      ),
+      Word(
+        id: 't7',
+        term: 'Tourist',
+        meaning: 'Khách du lịch',
+        example: 'Many tourists visit Ha Long Bay.',
+      ),
+      Word(
+        id: 't8',
+        term: 'Journey',
+        meaning: 'Chuyến đi',
+        example: 'The journey took five hours.',
+      ),
+      Word(
+        id: 't9',
+        term: 'Reservation',
+        meaning: 'Đặt chỗ',
+        example: 'I made a reservation online.',
+      ),
+      Word(
+        id: 't10',
+        term: 'Souvenir',
+        meaning: 'Quà lưu niệm',
+        example: 'She bought a souvenir for me.',
+      ),
+    ],
+  ),
+  Deck(
+    id: 'food',
+    name: 'Food',
+    icon: '🍜',
+    words: [
+      Word(
+        id: 'd1',
+        term: 'Rice',
+        meaning: 'Cơm / Gạo',
+        example: 'We eat rice every day.',
+      ),
+      Word(
+        id: 'd2',
+        term: 'Noodles',
+        meaning: 'Mì / Phở / Bún',
+        example: 'I love noodle soup.',
+      ),
+      Word(
+        id: 'd3',
+        term: 'Chicken',
+        meaning: 'Thịt gà',
+        example: 'Grilled chicken is delicious.',
+      ),
+      Word(
+        id: 'd4',
+        term: 'Beef',
+        meaning: 'Thịt bò',
+        example: 'He ordered beef with rice.',
+      ),
+      Word(
+        id: 'd5',
+        term: 'Vegetable',
+        meaning: 'Rau củ',
+        example: 'Eat more vegetables.',
+      ),
+      Word(
+        id: 'd6',
+        term: 'Fruit',
+        meaning: 'Trái cây',
+        example: 'I eat fruit after dinner.',
+      ),
+      Word(
+        id: 'd7',
+        term: 'Breakfast',
+        meaning: 'Bữa sáng',
+        example: 'I have breakfast at seven.',
+      ),
+      Word(
+        id: 'd8',
+        term: 'Lunch',
+        meaning: 'Bữa trưa',
+        example: 'We have lunch at noon.',
+      ),
+      Word(
+        id: 'd9',
+        term: 'Dinner',
+        meaning: 'Bữa tối',
+        example: 'Dinner is ready.',
+      ),
+      Word(
+        id: 'd10',
+        term: 'Delicious',
+        meaning: 'Ngon',
+        example: 'This soup is delicious.',
+      ),
+    ],
+  ),
+  Deck(
+    id: 'work',
+    name: 'Work',
+    icon: '💼',
+    words: [
+      Word(
+        id: 'w1',
+        term: 'Office',
+        meaning: 'Văn phòng',
+        example: 'She works in a big office.',
+      ),
+      Word(
+        id: 'w2',
+        term: 'Meeting',
+        meaning: 'Cuộc họp',
+        example: 'We have a meeting at nine.',
+      ),
+      Word(
+        id: 'w3',
+        term: 'Manager',
+        meaning: 'Quản lý',
+        example: 'The manager is very friendly.',
+      ),
+      Word(
+        id: 'w4',
+        term: 'Colleague',
+        meaning: 'Đồng nghiệp',
+        example: 'My colleague helped me today.',
+      ),
+      Word(
+        id: 'w5',
+        term: 'Salary',
+        meaning: 'Lương',
+        example: 'He receives his salary monthly.',
+      ),
+      Word(
+        id: 'w6',
+        term: 'Deadline',
+        meaning: 'Hạn chót',
+        example: 'The deadline is next Friday.',
+      ),
+      Word(
+        id: 'w7',
+        term: 'Project',
+        meaning: 'Dự án',
+        example: 'Our project is almost done.',
+      ),
+      Word(
+        id: 'w8',
+        term: 'Interview',
+        meaning: 'Phỏng vấn',
+        example: 'I have a job interview tomorrow.',
+      ),
+      Word(
+        id: 'w9',
+        term: 'Resume',
+        meaning: 'Sơ yếu lý lịch',
+        example: 'Please send me your resume.',
+      ),
+      Word(
+        id: 'w10',
+        term: 'Promotion',
+        meaning: 'Thăng chức',
+        example: 'She got a promotion this year.',
+      ),
+    ],
+  ),
+];
