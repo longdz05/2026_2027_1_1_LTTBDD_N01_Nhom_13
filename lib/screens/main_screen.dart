@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'decks_screen.dart';
 import 'home_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
   // Hai tab dưới là chỗ giữ chỗ, sẽ thay bằng màn hình thật ở các commit sau
   final List<Widget> _pages = const [
     HomeScreen(),
-    Center(child: Text('Danh sách bộ thẻ')),
+    DecksScreen(),
     Center(child: Text('Cài đặt')),
   ];
 
