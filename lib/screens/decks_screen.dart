@@ -55,12 +55,13 @@ class _DecksScreenState extends State<DecksScreen> {
                       final deck = filtered[index];
                       return DeckCard(
                         deck: deck,
-                        onTap: () {
-                          Navigator.of(context).push(
+                        onTap: () async {
+                          await Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (_) => DeckDetailScreen(deck: deck),
                             ),
                           );
+                          if (mounted) setState(() {});
                         },
                       );
                     },
