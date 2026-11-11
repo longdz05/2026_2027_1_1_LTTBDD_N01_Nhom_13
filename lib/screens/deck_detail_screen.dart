@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
 
 import '../models/deck.dart';
+import 'study_screen.dart';
 
-class DeckDetailScreen extends StatelessWidget {
+class DeckDetailScreen extends StatefulWidget {
   final Deck deck;
 
   const DeckDetailScreen({super.key, required this.deck});
 
   @override
+  State<DeckDetailScreen> createState() => _DeckDetailScreenState();
+}
+
+class _DeckDetailScreenState extends State<DeckDetailScreen> {
+  Future<void> _openStudy() async {
+    await Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => StudyScreen(deck: widget.deck)));
+    if (mounted) setState(() {});
+  }
+
+  void _soon() {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Tính năng này sẽ có sau!')));
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final deck = widget.deck;
+
     return Scaffold(
       appBar: AppBar(title: Text('${deck.icon} ${deck.name}')),
       body: Column(
@@ -55,7 +76,7 @@ class DeckDetailScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: FilledButton.icon(
-                      onPressed: () => _soon(context),
+                      onPressed: _openStudy,
                       icon: const Icon(Icons.style),
                       label: const Text('Học'),
                     ),
@@ -63,7 +84,7 @@ class DeckDetailScreen extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: () => _soon(context),
+                      onPressed: _soon,
                       icon: const Icon(Icons.quiz),
                       label: const Text('Kiểm tra'),
                     ),
@@ -75,11 +96,5 @@ class DeckDetailScreen extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  void _soon(BuildContext context) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Tính năng này sẽ có sau!')));
   }
 }
