@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/settings_provider.dart';
+import 'about_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -54,6 +55,21 @@ class SettingsScreen extends StatelessWidget {
               secondary: const Icon(Icons.dark_mode),
               value: s.isDark,
               onChanged: s.setDark,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Text(s.t('about'), style: Theme.of(context).textTheme.titleMedium),
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.groups),
+              title: Text(s.t('about_group')),
+              subtitle: Text(s.t('about_group_sub')),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (_) => const AboutScreen()));
+              },
             ),
           ),
         ],
