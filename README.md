@@ -65,7 +65,4 @@ flutter run
 
 Yêu cầu: đã cài Flutter SDK và có thiết bị hoặc trình duyệt Chrome để chạy.
 
-## Quản lý mã nguồn
 
-- Commit đầu tiên chỉ chứa code mẫu của Flutter.
-- Mỗi commit build thành công, thay đổi nhỏ và có message mô tả rõ nội dung.
