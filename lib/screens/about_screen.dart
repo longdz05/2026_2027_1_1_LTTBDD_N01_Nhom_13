@@ -50,18 +50,6 @@ class AboutScreen extends StatelessWidget {
                 ),
                 const Divider(height: 1),
                 _InfoTile(
-                  icon: Icons.person,
-                  title: s.t('member'),
-                  value: 'Vũ Thành Long',
-                ),
-                const Divider(height: 1),
-                _InfoTile(
-                  icon: Icons.badge,
-                  title: s.t('student_id'),
-                  value: '[Điền MSSV của mày]',
-                ),
-                const Divider(height: 1),
-                _InfoTile(
                   icon: Icons.cast_for_education,
                   title: s.t('teacher'),
                   value: 'que.nguyenxuan@phenikaa-uni.edu.vn',
@@ -75,7 +63,43 @@ class AboutScreen extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(height: 20),
+          Text(s.t('member'), style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 8),
+          const _MemberCard(name: 'Vũ Thành Long', studentId: '23010882'),
+          const SizedBox(height: 12),
+          const _MemberCard(name: 'Phạm Hồng Sơn', studentId: '23010883'),
         ],
+      ),
+    );
+  }
+}
+
+class _MemberCard extends StatelessWidget {
+  final String name;
+  final String studentId;
+
+  const _MemberCard({required this.name, required this.studentId});
+
+  @override
+  Widget build(BuildContext context) {
+    final s = context.watch<SettingsProvider>();
+    final scheme = Theme.of(context).colorScheme;
+
+    return Card(
+      child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: scheme.primaryContainer,
+          child: Text(
+            name.split(' ').last[0],
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: scheme.onPrimaryContainer,
+            ),
+          ),
+        ),
+        title: Text(name),
+        subtitle: Text('${s.t('student_id')}: $studentId'),
       ),
     );
   }
