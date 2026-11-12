@@ -2,7 +2,7 @@
 
 **Ứng dụng học từ vựng bằng Flashcard trên thiết bị di động**
 
-Đồ án môn **Lập trình thiết bị di động** (Flutter).
+Báo cáo môn **Lập trình thiết bị di động** (Flutter).
 
 ## Thông tin nhóm
 
