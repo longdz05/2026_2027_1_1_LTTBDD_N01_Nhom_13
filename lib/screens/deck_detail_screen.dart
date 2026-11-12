@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/deck.dart';
+import '../providers/settings_provider.dart';
 import 'quiz_screen.dart';
 import 'study_screen.dart';
 
@@ -29,6 +31,7 @@ class _DeckDetailScreenState extends State<DeckDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final s = context.watch<SettingsProvider>();
     final deck = widget.deck;
 
     return Scaffold(
@@ -40,7 +43,12 @@ class _DeckDetailScreenState extends State<DeckDetailScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Đã thuộc ${deck.learnedCount} / ${deck.words.length} từ'),
+                Text(
+                  s.t('learned_count', {
+                    'a': '${deck.learnedCount}',
+                    'b': '${deck.words.length}',
+                  }),
+                ),
                 const SizedBox(height: 8),
                 LinearProgressIndicator(
                   value: deck.progress,
@@ -79,7 +87,7 @@ class _DeckDetailScreenState extends State<DeckDetailScreen> {
                     child: FilledButton.icon(
                       onPressed: _openStudy,
                       icon: const Icon(Icons.style),
-                      label: const Text('Học'),
+                      label: Text(s.t('study_btn')),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -87,7 +95,7 @@ class _DeckDetailScreenState extends State<DeckDetailScreen> {
                     child: OutlinedButton.icon(
                       onPressed: _openQuiz,
                       icon: const Icon(Icons.quiz),
-                      label: const Text('Kiểm tra'),
+                      label: Text(s.t('quiz_btn')),
                     ),
                   ),
                 ],

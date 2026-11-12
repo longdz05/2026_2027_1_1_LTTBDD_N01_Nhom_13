@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/deck.dart';
+import '../providers/settings_provider.dart';
 
 class DeckCard extends StatelessWidget {
   final Deck deck;
@@ -10,6 +12,7 @@ class DeckCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = context.watch<SettingsProvider>();
     final scheme = Theme.of(context).colorScheme;
     return Card(
       clipBehavior: Clip.antiAlias,
@@ -24,7 +27,7 @@ class DeckCard extends StatelessWidget {
               const SizedBox(height: 8),
               Text(deck.name, style: Theme.of(context).textTheme.titleMedium),
               const SizedBox(height: 4),
-              Text('${deck.words.length} từ'),
+              Text(s.t('words_unit', {'n': '${deck.words.length}'})),
               const SizedBox(height: 12),
               LinearProgressIndicator(
                 value: deck.progress,

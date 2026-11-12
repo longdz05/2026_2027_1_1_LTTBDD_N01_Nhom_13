@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../data/sample_data.dart';
 import '../models/deck.dart';
+import '../providers/settings_provider.dart';
 import '../widgets/deck_card.dart';
 import 'deck_detail_screen.dart';
 
@@ -17,12 +19,13 @@ class _DecksScreenState extends State<DecksScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final s = context.watch<SettingsProvider>();
     final List<Deck> filtered = sampleDecks
         .where((d) => d.name.toLowerCase().contains(_query.toLowerCase()))
         .toList();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Bộ thẻ')),
+      appBar: AppBar(title: Text(s.t('nav_decks'))),
       body: Column(
         children: [
           Padding(
@@ -30,7 +33,7 @@ class _DecksScreenState extends State<DecksScreen> {
             child: TextField(
               onChanged: (value) => setState(() => _query = value),
               decoration: InputDecoration(
-                hintText: 'Tìm bộ thẻ...',
+                hintText: s.t('search_hint'),
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -40,7 +43,7 @@ class _DecksScreenState extends State<DecksScreen> {
           ),
           Expanded(
             child: filtered.isEmpty
-                ? const Center(child: Text('Không tìm thấy bộ thẻ nào'))
+                ? Center(child: Text(s.t('no_deck')))
                 : GridView.builder(
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                     gridDelegate:
