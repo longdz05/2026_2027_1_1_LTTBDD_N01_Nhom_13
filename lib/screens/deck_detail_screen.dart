@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/deck.dart';
+import 'quiz_screen.dart';
 import 'study_screen.dart';
 
 class DeckDetailScreen extends StatefulWidget {
@@ -20,10 +21,10 @@ class _DeckDetailScreenState extends State<DeckDetailScreen> {
     if (mounted) setState(() {});
   }
 
-  void _soon() {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Tính năng này sẽ có sau!')));
+  Future<void> _openQuiz() async {
+    await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => QuizScreen(deck: widget.deck)));
+    if (mounted) setState(() {});
   }
 
   @override
@@ -84,7 +85,7 @@ class _DeckDetailScreenState extends State<DeckDetailScreen> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: _soon,
+                      onPressed: _openQuiz,
                       icon: const Icon(Icons.quiz),
                       label: const Text('Kiểm tra'),
                     ),

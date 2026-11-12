@@ -13,11 +13,11 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
-  // Hai tab dưới là chỗ giữ chỗ, sẽ thay bằng màn hình thật ở các commit sau
-  final List<Widget> _pages = const [
+  // Không dùng const để các tab được dựng lại và cập nhật số liệu mới
+  List<Widget> get _pages => [
     HomeScreen(),
     DecksScreen(),
-    Center(child: Text('Cài đặt')),
+    const Center(child: Text('Cài đặt')),
   ];
 
   @override
