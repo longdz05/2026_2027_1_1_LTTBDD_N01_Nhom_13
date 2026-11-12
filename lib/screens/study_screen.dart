@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/deck.dart';
+import '../providers/settings_provider.dart';
 import '../widgets/flip_card.dart';
 
 class StudyScreen extends StatefulWidget {
@@ -36,17 +38,20 @@ class _StudyScreenState extends State<StudyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final s = context.watch<SettingsProvider>();
     final total = widget.deck.words.length;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Học: ${widget.deck.name}')),
+      appBar: AppBar(
+        title: Text(s.t('study_title', {'name': widget.deck.name})),
+      ),
       body: SafeArea(
-        child: _finished ? _buildResult(total) : _buildStudy(total),
+        child: _finished ? _buildResult(s, total) : _buildStudy(s, total),
       ),
     );
   }
 
-  Widget _buildStudy(int total) {
+  Widget _buildStudy(SettingsProvider s, int total) {
     final word = widget.deck.words[_index];
     final scheme = Theme.of(context).colorScheme;
 
@@ -54,7 +59,7 @@ class _StudyScreenState extends State<StudyScreen> {
       padding: const EdgeInsets.all(20),
       child: Column(
         children: [
-          Text('Thẻ ${_index + 1} / $total'),
+          Text(s.t('card_of', {'a': '${_index + 1}', 'b': '$total'})),
           const SizedBox(height: 8),
           LinearProgressIndicator(
             value: _index / total,
@@ -75,7 +80,7 @@ class _StudyScreenState extends State<StudyScreen> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                const Text('Chạm để lật thẻ'),
+                Text(s.t('tap_flip')),
               ],
             ),
             back: _face(
@@ -107,9 +112,9 @@ class _StudyScreenState extends State<StudyScreen> {
                 child: OutlinedButton.icon(
                   onPressed: () => _answer(false),
                   icon: const Icon(Icons.close),
-                  label: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 14),
-                    child: Text('Chưa thuộc'),
+                  label: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    child: Text(s.t('not_known')),
                   ),
                 ),
               ),
@@ -118,9 +123,9 @@ class _StudyScreenState extends State<StudyScreen> {
                 child: FilledButton.icon(
                   onPressed: () => _answer(true),
                   icon: const Icon(Icons.check),
-                  label: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 14),
-                    child: Text('Đã thuộc'),
+                  label: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    child: Text(s.t('known')),
                   ),
                 ),
               ),
@@ -148,7 +153,7 @@ class _StudyScreenState extends State<StudyScreen> {
     );
   }
 
-  Widget _buildResult(int total) {
+  Widget _buildResult(SettingsProvider s, int total) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(24),
@@ -158,21 +163,23 @@ class _StudyScreenState extends State<StudyScreen> {
             const Text('🎉', style: TextStyle(fontSize: 72)),
             const SizedBox(height: 16),
             Text(
-              'Hoàn thành bộ thẻ!',
+              s.t('deck_done'),
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 8),
-            Text('Bạn thuộc $_knownInSession / $total từ'),
+            Text(
+              s.t('known_session', {'a': '$_knownInSession', 'b': '$total'}),
+            ),
             const SizedBox(height: 32),
             FilledButton.icon(
               onPressed: _restart,
               icon: const Icon(Icons.replay),
-              label: const Text('Học lại'),
+              label: Text(s.t('restart')),
             ),
             const SizedBox(height: 12),
             OutlinedButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Quay về bộ thẻ'),
+              child: Text(s.t('back_decks')),
             ),
           ],
         ),

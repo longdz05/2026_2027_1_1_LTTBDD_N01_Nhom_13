@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/deck.dart';
 import '../models/word.dart';
+import '../providers/settings_provider.dart';
 import 'quiz_result_screen.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -129,10 +131,13 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final s = context.watch<SettingsProvider>();
     final total = _questions.length;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Kiểm tra: ${widget.deck.name}')),
+      appBar: AppBar(
+        title: Text(s.t('quiz_title', {'name': widget.deck.name})),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -142,7 +147,9 @@ class _QuizScreenState extends State<QuizScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Câu ${_index + 1} / $total'),
+                  Text(
+                    s.t('question_of', {'a': '${_index + 1}', 'b': '$total'}),
+                  ),
                   Row(
                     children: [
                       const Icon(Icons.timer_outlined, size: 18),
@@ -165,7 +172,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: Column(
                     children: [
-                      const Text('Nghĩa của từ này là gì?'),
+                      Text(s.t('quiz_prompt')),
                       const SizedBox(height: 8),
                       Text(
                         _current.term,

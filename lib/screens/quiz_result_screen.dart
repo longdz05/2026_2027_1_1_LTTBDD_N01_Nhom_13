@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/word.dart';
+import '../providers/settings_provider.dart';
 
 class QuizResultScreen extends StatelessWidget {
   final int score;
@@ -18,12 +20,13 @@ class QuizResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = context.watch<SettingsProvider>();
     final percent = total == 0 ? 0 : (score / total * 100).round();
     final emoji = percent >= 80 ? '🏆' : (percent >= 50 ? '👍' : '💪');
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kết quả'),
+        title: Text(s.t('result_title')),
         automaticallyImplyLeading: false,
       ),
       body: SafeArea(
@@ -34,7 +37,7 @@ class QuizResultScreen extends StatelessWidget {
               Text(emoji, style: const TextStyle(fontSize: 64)),
               const SizedBox(height: 8),
               Text(
-                '$score / $total câu đúng',
+                s.t('correct_count', {'a': '$score', 'b': '$total'}),
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               Text('$percent%'),
@@ -43,7 +46,7 @@ class QuizResultScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Từ cần ôn lại',
+                    s.t('review_words'),
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
@@ -51,9 +54,7 @@ class QuizResultScreen extends StatelessWidget {
               ],
               Expanded(
                 child: wrongWords.isEmpty
-                    ? const Center(
-                        child: Text('Bạn trả lời đúng hết, tuyệt vời!'),
-                      )
+                    ? Center(child: Text(s.t('all_correct')))
                     : ListView.separated(
                         itemCount: wrongWords.length,
                         separatorBuilder: (_, __) => const Divider(height: 1),
@@ -69,9 +70,9 @@ class QuizResultScreen extends StatelessWidget {
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 14),
-                        child: Text('Thoát'),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        child: Text(s.t('exit')),
                       ),
                     ),
                   ),
@@ -79,9 +80,9 @@ class QuizResultScreen extends StatelessWidget {
                   Expanded(
                     child: FilledButton(
                       onPressed: onRetry,
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 14),
-                        child: Text('Làm lại'),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        child: Text(s.t('retry')),
                       ),
                     ),
                   ),
